@@ -38,12 +38,12 @@ NORSTORE
 A directory at /projects/NS9012K/www/hts-nonsecure.uio.no/ called Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d) is created
 
 ABEL
-Symbolic links to folders is created in a folder .temp/$extSampleName usin ginformatin from SMRTcell.txt 
+Symbolic links to folders is created in a folder /work/users/halfdanr/temp/$extSampleName using ginformatin from SMRTcell.txt 
 Files of interest from these folders is selected and compressed into tarball "$extSampleName.tgz" keeping the file structure of the original SMRTcell folder.
 The tarball is copied to Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d) at Norstore
 
 NORTSTORE
-An md5sums.txts file is created in Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+An md5sums.txt file is created in Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 .htaccess is also created with "require user $refLastNameCust_lower-$sampleType"
 Password for user is added to the password database at norstore
 
