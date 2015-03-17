@@ -10,8 +10,8 @@
 # How do I get lowercase for i.e. refLastNameCust
 # Uncomment the add passord command
 ##########################################
-This shell script creates a tarball with folder structure:
-External sample name/SMRTcellFolder/Analysis_Results/
+#This shell script creates a tarball with folder structure:
+#External sample name/SMRTcellFolder/Analysis_Results/
 ##########################################Working at Abel
 #Can optionally run a fast test of the script using small files
 testOrFullScale=yes
