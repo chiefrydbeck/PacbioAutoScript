@@ -17,15 +17,16 @@
 testOrFullScale=yes
 #Create password for delivery folder
 pw=$(tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1)
-rm ./dron.txt
-touch ./dron.txt
-echo "$pw" >> dron.txt
 #Read Aves readme file with parameters for shell based on 
 #How to read par file: http://stackoverflow.com/questions/17530141/how-to-include-a-file-containing-variables-in-a-shell-script
 #echo $1/parForShell.sh
 . $1/parForShell.sh
 #Make variable string content lower case
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
+#write pwd
+rm ./dron_$extSampleName.txt
+touch ./dron_$extSampleName.txt
+echo "$pw" >> dron_$extSampleName.txt
 ##########################################SSH Norstore##########################################Go to Norstore and create directory for delivery
 ssh halfdanr@login.norstore.uio.no <<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/
