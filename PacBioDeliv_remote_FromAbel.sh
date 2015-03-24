@@ -123,6 +123,8 @@ HERE
 
 #Halfdan Rydbeck
 
+echo "Done!"
+
 
 
 
