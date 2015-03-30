@@ -2,9 +2,8 @@
 Shell and python script for automatic delivery of PacBio output
  
 
-EXAMPLE OF HOW TO CALL THE SCRIPT
-sh PacBioDeliv_remote_FromAbel.sh /projects/nscdata/utsp/H/HoracioSchneider/PB_0124
-
+EXAMPLE OF HOW TO CALL THE SHELL SCRIPTS
+sh rsyncPacBioSampleTgzToNorstore.sh /projects/nscdata/utsp/H/HoracioSchneider/PB_0124
 
 The script should be run from Abel and needs as argument the path to a directory with delivery information. 
 The directory must contain a "parForShell.sh" and a "SMRTcells.txt"
@@ -28,8 +27,7 @@ It shoud have the following format:
 /projects/nscdata/runsPacbio/2014run38_217/G09_1
 /projects/nscdata/runsPacbio/2014run29_208/A01_1 
 
-
-PACBIODELIV_REMOTE_FROMABEL.SH WILL DO THE FOLLOWING: 
+rsyncPacBioSampleTgzToNorstore.sh WILL DO THE FOLLOWING: 
 
 ABEL
 parForShell.sh is read
@@ -42,7 +40,11 @@ Symbolic links to folders is created in a folder /work/users/halfdanr/temp/$extS
 Files of interest from these folders is selected and compressed into tarball "$extSampleName.tgz" keeping the file structure of the original SMRTcell folder.
 The tarball is copied to Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d) at Norstore
 
-NORTSTORE
+sh finaliseNorstoreDeliveryFolder.sh /projects/nscdata/utsp/H/HoracioSchneider/PB_0124
+rsyncPacBioSampleTgzToNorstore.sh WILL DO THE FOLLOWING:
+ABEL
+parForShell.sh is read
+NORSTSTORE
 An md5sums.txt file is created in Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 .htaccess is also created with "require user $refLastNameCust_lower-$sampleType"
 Password for user is added to the password database at norstore
