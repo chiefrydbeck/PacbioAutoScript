@@ -18,7 +18,7 @@ start=$(date +%s.%N)
 #Can optionally run a fast test of the script using small files
 testOrFullScale=yes
 #send email to whnd finished
-emailAdressOFScriptRunner=halfdanr@ibv.uio.no
+emailAdressOfScriptRunner=halfdanr@ibv.uio.no
 #Read Aves readme file with parameters for shell based on 
 #How to read par file: http://stackoverflow.com/questions/17530141/how-to-include-a-file-containing-variables-in-a-shell-script
 #echo $1/parForShell.sh
@@ -88,7 +88,7 @@ end=$(date +%s)
 #calculate runtime
 runtime=$(python -c "print(${end} - ${start})")
 #send email
-echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $mailAdressOFScriptRunner
+echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailAdressOfScriptRunner
 
 
 
