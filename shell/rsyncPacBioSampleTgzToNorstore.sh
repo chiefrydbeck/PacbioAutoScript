@@ -34,9 +34,9 @@ HERE
 #at Abel
 cd /work/users/halfdanr/PacbioAutomation/
 #make temporary folder to collect symlinks
-mkdir -p Pacbio_tarballs
+mkdir -p Tarballs
 #enter temp folder
-cd Pacbio_tarballs
+cd Tarballs
 #create SampleName,SMRTcell directory structure based on Aves readme file
 #create folder named with external SampleName
 mkdir -p $extSampleName 
