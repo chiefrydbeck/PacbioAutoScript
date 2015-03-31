@@ -32,16 +32,13 @@ mkdir Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 HERE
 ##########################################logout Norstore##########################################
 #at Abel
-cd /work/users/halfdanr
+cd /work/users/halfdanr/PacbioAutomation/
 #make temporary folder to collect symlinks
 mkdir -p Pacbio_tarballs
 #enter temp folder
 cd Pacbio_tarballs
 #create SampleName,SMRTcell directory structure based on Aves readme file
 #create folder named with external SampleName
-mkdir -p $extSampleName 
-cd $extSampleName
-#create a second folder named with external SampleName
 mkdir -p $extSampleName 
 cd $extSampleName
 #create SMRTcell directories
@@ -52,7 +49,7 @@ while read file ; do
 	eval ln\ -s\ \$file
 #The Ave directory and SMRTcell.xt file is used here
 done < $1/SMRTcells.txt
-#step up temp folder
+#step up temp into Pacbio_tarballs folder
 cd ..
 #Make tarball of subset of files in decretory structure base command (tar -h -czvf CIAT22838_R2.tgz *_subreads.fastq *.metadata.xml *.bax.h5)
 #link for info:http://www.cyberciti.biz/faq/linux-unix-find-files-with-symbolic-links/
