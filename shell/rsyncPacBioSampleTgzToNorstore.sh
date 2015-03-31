@@ -52,7 +52,7 @@ while read file ; do
 	eval ln\ -s\ \$file
 #The Ave directory and SMRTcell.xt file is used here
 done < $1/SMRTcells.txt
-#step into temp folder
+#step up temp folder
 cd ..
 #Make tarball of subset of files in decretory structure base command (tar -h -czvf CIAT22838_R2.tgz *_subreads.fastq *.metadata.xml *.bax.h5)
 #link for info:http://www.cyberciti.biz/faq/linux-unix-find-files-with-symbolic-links/
@@ -63,6 +63,8 @@ then
 echo "The user wants raw data"
 echo "Creating the tarball"
    find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
+   #remove folder so that it does not get copied along with tar ball. This should be a temporary solution (until it is possible to copy file s with parallel rsync script)
+   rm -rf ./$extSampleName
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
    #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	#using script for parallell rsync instead: Only takes content of a directory as input
@@ -71,7 +73,9 @@ echo "Creating the tarball"
 else
    echo "The user do not want raw data"
    echo "Creating the tarball"
-    find -L ./$extSampleName -iname "*.subreads.fastq" | tar -h -czvf $extSampleName.tgz -T -
+   find -L ./$extSampleName -iname "*.subreads.fastq" | tar -h -czvf $extSampleName.tgz -T -
+   #remove folder so that it does not get copied along with tar ball. This should be a temporary solution (until it is possible to copy file s with parallel rsync script)
+   rm -rf ./$extSampleName
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
    #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	#using script for parallell rsync instead: Only takes content of a directory as input
@@ -88,7 +92,11 @@ end=$(date +%s)
 #calculate runtime
 runtime=$(python -c "print(${end} - ${start})")
 #send email
+echo "sending email to $emailAdressOfScriptRunner using variable"
 echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailAdressOfScriptRunner
+echo "sending email to halfdan@ibv.uio.no"
+echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" halfdanr@ibv.uio.no
+
 
 
 
