@@ -72,6 +72,7 @@ find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o 
 
 #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
 #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+echo "$extSampleName has been copied to Norstore" | mail -s "$extSampleName has been copied to Norstore" halfdanr@ibv.uio.no
 echo "Done!"
 
 
