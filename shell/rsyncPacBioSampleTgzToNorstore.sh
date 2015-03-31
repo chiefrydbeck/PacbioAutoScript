@@ -34,11 +34,14 @@ HERE
 #at Abel
 cd /work/users/halfdanr
 #make temporary folder to collect symlinks
-mkdir -p temp
+mkdir -p Pacbio_tarballs
 #enter temp folder
-cd temp
+cd Pacbio_tarballs
 #create SampleName,SMRTcell directory structure based on Aves readme file
 #create folder named with external SampleName
+mkdir -p $extSampleName 
+cd $extSampleName
+#create a second folder named with external SampleName
 mkdir -p $extSampleName 
 cd $extSampleName
 #create SMRTcell directories
@@ -58,21 +61,25 @@ cd ..
 if [ wantRawData=="yes" ]
 then
 echo "The user wants raw data"
+echo "Creating the tarball"
    find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
    #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
-	#using script for parallell rsync instead
-	/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#using script for parallell rsync instead: Only takes content of a directory as input
+	echo "Copying tar file"
+	/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
    echo "The user do not want raw data"
+   echo "Creating the tarball"
     find -L ./$extSampleName -iname "*.subreads.fastq" | tar -h -czvf $extSampleName.tgz -T -
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
    #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
-	#using script for parallell rsync instead
-	/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#using script for parallell rsync instead: Only takes content of a directory as input
+	echo "Copying tar file"
+	/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 fi
 
-find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
+#find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
 
 #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
 #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
