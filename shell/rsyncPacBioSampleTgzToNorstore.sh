@@ -66,7 +66,11 @@ echo "Creating the tarball"
    #rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	#using script for parallell rsync instead: Only takes content of a directory as input
 	echo "Copying tar file"
-	/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	export PATH=$PATH:/usit/abel/u1/olews/work/parsyncfp
+	#using a script for parallel copying provided by Ole Widar Saastad from USIT
+	#/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#using par
+	parsyncfp -NP=24 halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
    echo "The user do not want raw data"
    echo "Creating the tarball"
