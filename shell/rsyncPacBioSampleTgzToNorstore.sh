@@ -70,7 +70,7 @@ echo "Creating the tarball"
 	#using a script for parallel copying provided by Ole Widar Saastad from USIT
 	#/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	#using par
-	parsyncfp -NP=24 halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	parsyncfp -NP=24 $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
    echo "The user do not want raw data"
    echo "Creating the tarball"
