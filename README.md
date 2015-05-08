@@ -22,9 +22,9 @@ The shell scripts is stored in ".../home/PacbioAutomation/PacbioAutoScript/shell
 How I run the scripts
 cd ../home/PacbioAutomation/AutomationRun
 screen -S testPacbioAutomation
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/ 01_Test 1>test.out 2>test.err
+sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test.out 2>test.err
 #When the above is done
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/ 01_Test 1>test.out 2>test.err
+sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test.out 2>test.err
 ## Currently the two scripts needs to be run on the same data. Otherwise the foldernames will use different dates
 
 ../home/PacbioAutomation/DelivInstrucs/01_Test must contain a "parForShell.sh" and a "SMRTcells.txt" file.
