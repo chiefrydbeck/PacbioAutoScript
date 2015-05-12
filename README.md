@@ -17,6 +17,8 @@ This is the directory structure that I use when running the scripts:
 |   `-- shell
 `-- Tarballs
 
+
+PacbioAutoScript contains the code and a .git directory. So to issue git command one should stand in PacbioAutoScript.
 The shell scripts is stored in ".../home/PacbioAutomation/PacbioAutoScript/shell/"
 
 How I run the scripts
@@ -30,7 +32,7 @@ sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstore
 
 ../home/PacbioAutomation/DelivInstrucs/01_Test must contain a "parForShell.sh" and a "SMRTcells.txt" file.
 
-"parForShell.sh should have the following format:
+"parForShell.sh should have the following format(it woudl be nice if it also included the user email adresses):
 wantRawData=Yes (or No)
 refFirstNameCust=Firstname
 refLastNameCust=Lastname
