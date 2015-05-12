@@ -44,24 +44,32 @@ HERE
 ##############################Formulate an email
 ####################################################################################
 #http://stackoverflow.com/questions/4658283/shell-script-to-send-email
-#mail -s "Sequence ready for download - sequencing run XXXXX - sample $refLastNameCust" you@youremailid.com < /home/calvin/application.log
-#rm ./letterForDeliveryToUser.txt
-#touch ./letterForDeliveryToUser.txt
-#echo "AuthUserFile /norstore_osl/home/timothyh/.htpasswd" >> ./letterForDelivery
+##########################################SSH Cod node##########################################
+ssh halfdanr@cod3.uio.no <<HERE
+cat > email.txt << EOF1
+Subject:Pacbio sequence data ready for download - Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 
+The data can be downloaded from
+https://webserver1.norstore.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 
-#Hi,
+username: $refLastNameCust_lower-$sampleType
+Password: $pw
 
-#The data can be downloaded from
-#https://webserver1.norstore.uio.no/Project_Arrighi-gDNA-2015-02-16
+There are ??? data files available:
+?.tgz ??.tgz
 
-#username: arrighi-gdna
-#password: puBXEEdrb4x8
+They contain the subreads.fastq, bax.h5 and metadata.xml files.
 
-#Subreads.fastq, bax.h5 and metadata.xml files are available in the file CIAT22838_R2.tgz
+An md5sum.txt file is also included in the result folder. Please refer to our website (http://www.sequencing.uio.no/services/data-delivery/) for help on how to download the data and on how to use the md5sum.txt file to check whether the files are downloaded completely. 
 
-#Best regards,
+Best regards,
 
-#Halfdan Rydbeck
+Halfdan Rydbeck
+EOF1
+sendmail halfdanr@ibv.uio.no < email.txt
+#echo "sending email to $emailAdressOfScriptRunner using variable"
+#echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailRecipients
+HERE
+##########################################logout cod node##########################################
 
 echo "Done!"
