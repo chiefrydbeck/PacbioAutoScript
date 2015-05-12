@@ -22,10 +22,11 @@ The shell scripts is stored in ".../home/PacbioAutomation/PacbioAutoScript/shell
 How I run the scripts
 cd ../home/PacbioAutomation/AutomationRun
 screen -S testPacbioAutomation
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test.out 2>test.err
+sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test_1.out 2>test_1.err
 #When the above is done
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test.out 2>test.err
-## Currently the two scripts needs to be run on the same data. Otherwise the foldernames will use different dates
+screen -rd testPacbioAutomation
+sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test_2.out 2>test_2.err
+## Currently the two scripts needs to be run at the same date. Otherwise the folder names will have different names in them.
 
 ../home/PacbioAutomation/DelivInstrucs/01_Test must contain a "parForShell.sh" and a "SMRTcells.txt" file.
 
@@ -68,6 +69,7 @@ NORSTSTORE
 An md5sums.txt file is created in Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 .htaccess is also created with "require user $refLastNameCust_lower-$sampleType"
 Password for user is added to the password database at norstore
+The password is written to a file starting with dron_ so that it can be included in the delivery email to the user.
 
 ##########################################Remember
 # Implement the choice between fastq and raw data
