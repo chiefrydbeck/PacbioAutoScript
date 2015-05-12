@@ -24,10 +24,10 @@ The shell scripts is stored in ".../home/PacbioAutomation/PacbioAutoScript/shell
 How I run the scripts
 cd ../home/PacbioAutomation/AutomationRun
 screen -S testPacbioAutomation
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test_1.out 2>test_1.err
+sh /work/projects/nscdata/PacbioAutomation/PacbioAutoScript/shell/rsyncPacBioSampleTgzToNorstore.sh /work/projects/nscdata/PacbioAutomation/DelivInstrucs/01_Test 1>test_1.out 2>test_1.err
 #When the above is done
 screen -rd testPacbioAutomation
-sh /work/users/halfdanr/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/users/halfdanr/PacbioAutomation/DelivInstrucs/01_Test 1>test_2.out 2>test_2.err
+sh /work/projects/nscdata/PacbioAutomation/PacbioAutoScript/shell/finaliseNorstoreDeliveryFolder.sh /work/projects/nscdata/PacbioAutomation/DelivInstrucs/01_Test 1>test_2.out 2>test_2.err
 ## Currently the two scripts needs to be run at the same date. Otherwise the folder names will have different names in them.
 
 ../home/PacbioAutomation/DelivInstrucs/01_Test must contain a "parForShell.sh" and a "SMRTcells.txt" file.
@@ -59,7 +59,7 @@ NORSTORE
 A directory at /projects/NS9012K/www/hts-nonsecure.uio.no/ called Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d) is created
 
 ABEL
-Symbolic links to folders is created in a folder /work/users/halfdanr/temp/$extSampleName using ginformatin from SMRTcell.txt 
+Symbolic links to folders is created in a folder /work/projects/nscdata/temp/$extSampleName using ginformatin from SMRTcell.txt 
 Files of interest from these folders is selected and compressed into tarball "$extSampleName.tgz" keeping the file structure of the original SMRTcell folder.
 The tarball is copied to Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d) at Norstore
 

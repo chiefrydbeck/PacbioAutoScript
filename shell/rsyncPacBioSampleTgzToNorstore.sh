@@ -27,7 +27,7 @@ mkdir Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 HERE
 ##########################################logout Norstore########################################
 ##At Abel
-cd /work/users/halfdanr/PacbioAutomation/
+cd /work/projects/nscdata/PacbioAutomation/
 ##Make temporary folder to collect symlinks
 mkdir -p Tarballs
 ##Enter temp folder
@@ -64,7 +64,7 @@ echo "Creating the tarball"
 	echo "Copying tar file"
 	export PATH=$PATH:/usit/abel/u1/olews/work/parsyncfp
 	##Using a script for parallel copying provided by Ole Widar Saastad from USIT
-	#/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using par
 	#parsyncfp -NP=24 $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
@@ -77,7 +77,7 @@ else
    rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using script for parallell rsync instead: Only takes content of a directory as input
 	echo "Copying tar file"
-	#/work/users/halfdanr/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using par
 	#parsyncfp -NP=24 $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 fi
