@@ -5,6 +5,7 @@
 . $1/parForShell.sh
 #Make variable string content lower case
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
+emailRecipients=halfdanr@ibv.uio.no
 #Create password for delivery folder
 pw=$(tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1)
 #write pwd
@@ -47,13 +48,13 @@ HERE
 ##########################################SSH Cod node##########################################
 ssh halfdanr@cod3.uio.no <<HERE
 cat > email.txt << EOF1
-Subject:Pacbio sequence data ready for download - Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+Subject:Pacbio sequence data ready for download - Project_$refLastNameCust_$sampleType_$(date +%Y-%m-%d)
 
 The data can be downloaded from
-https://webserver1.norstore.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+https://webserver1.norstore.uio.no/Project_$refLastNameCust_$sampleType_$(date +%Y-%m-%d)
 
 username: $refLastNameCust_lower-$sampleType
-Password: $pw
+Password: "$pw"
 
 There are ??? data files available:
 ?.tgz ??.tgz
@@ -66,7 +67,7 @@ Best regards,
 
 Halfdan Rydbeck
 EOF1
-sendmail halfdanr@ibv.uio.no < email.txt
+sendmail $emailRecipients < email.txt
 #echo "sending email to $emailAdressOfScriptRunner using variable"
 #echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailRecipients
 HERE
