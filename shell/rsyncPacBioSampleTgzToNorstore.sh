@@ -100,8 +100,8 @@ ssh cod3.uio.no <<HERE
 #$extSampleName has been copied to Norstore. Runtime was $runtime.
 #EOF1
 #sendmail halfdanr@ibv.uio.no,alexajo@uio.no < email.txt
-echo "sending email to $emailAdressOfScriptRunner using variable"
-echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailRecipients
+echo "sending email to ${emailRecipients} using variable"
+echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mail -s "${extSampleName} has been copied to Norstore" ${emailRecipients}
 HERE
 ##########################################logout cod node##########################################
 

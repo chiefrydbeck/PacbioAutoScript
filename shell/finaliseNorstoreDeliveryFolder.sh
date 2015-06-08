@@ -54,7 +54,7 @@ The data can be downloaded from
 https://webserver1.norstore.uio.no/Project_${refLastNameCust}_${sampleType}_$(date +%Y-%m-%d)
 
 username: ${refLastNameCust_lower}-${sampleType}
-Password: "${pw}"
+Password: ${pw}
 
 There are ??? data files available:
 ?.tgz ??.tgz
