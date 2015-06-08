@@ -48,13 +48,13 @@ HERE
 ##########################################SSH Cod node##########################################
 ssh cod3.uio.no <<HERE
 cat > email.txt << EOF1
-Subject:Pacbio sequence data ready for download - Project_$refLastNameCust_$sampleType_$(date +%Y-%m-%d)
+Subject:Pacbio sequence data ready for download - Project_${refLastNameCust}_${sampleType}_$(date +%Y-%m-%d)
 
 The data can be downloaded from
-https://webserver1.norstore.uio.no/Project_$refLastNameCust_$sampleType_$(date +%Y-%m-%d)
+https://webserver1.norstore.uio.no/Project_${refLastNameCust}_${sampleType}_$(date +%Y-%m-%d)
 
-username: $refLastNameCust_lower-$sampleType
-Password: "$pw"
+username: ${refLastNameCust_lower}-${sampleType}
+Password: "${pw}"
 
 There are ??? data files available:
 ?.tgz ??.tgz
