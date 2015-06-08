@@ -5,7 +5,7 @@
 . $1/parForShell.sh
 #Make variable string content lower case
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
-emailRecipients=halfdanr@ibv.uio.no
+emailRecipients=halfdanr@ibv.uio.no,alexajo@uio.no
 #Create password for delivery folder
 pw=$(tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1)
 #write pwd
@@ -13,7 +13,7 @@ rm ./dron_$extSampleName.txt
 touch ./dron_$extSampleName.txt
 echo "$pw" >> dron_$extSampleName.txt
 ##########################################SSH Norstore##########################################
-ssh halfdanr@login.norstore.uio.no<<HERE
+ssh login.norstore.uio.no<<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 #remove any previous md5sums.txts
 rm ./md5sums.txts
@@ -46,7 +46,7 @@ HERE
 ####################################################################################
 #http://stackoverflow.com/questions/4658283/shell-script-to-send-email
 ##########################################SSH Cod node##########################################
-ssh halfdanr@cod3.uio.no <<HERE
+ssh cod3.uio.no <<HERE
 cat > email.txt << EOF1
 Subject:Pacbio sequence data ready for download - Project_$refLastNameCust_$sampleType_$(date +%Y-%m-%d)
 

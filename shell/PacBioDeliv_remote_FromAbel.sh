@@ -28,13 +28,13 @@ rm ./dron_$extSampleName.txt
 touch ./dron_$extSampleName.txt
 echo "$pw" >> dron_$extSampleName.txt
 ##########################################SSH Norstore##########################################Go to Norstore and create directory for delivery
-ssh halfdanr@login.norstore.uio.no <<HERE
+ssh login.norstore.uio.no <<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/
 mkdir Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 HERE
 ##########################################logout Norstore##########################################
 #at Abel
-cd /work/users/halfdanr
+cd /work/users/${USER}
 #make temporary folder to collect symlinks
 mkdir -p temp
 #enter temp folder
@@ -62,18 +62,18 @@ then
 echo "The user wants raw data"
    find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-   rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
    echo "The user do not want raw data"
     find -L ./$extSampleName -iname "*.subreads.fastq" | tar -h -czvf $extSampleName.tgz -T -
    #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-   rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 fi
 
 find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
 
 #Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 echo "Done!"
 
 

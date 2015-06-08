@@ -10,7 +10,7 @@ start=$(date +%s.%N)
 ##Can optionally run a fast test of the script using small files. Not in use yet
 #testOrFullScale=yes
 ##Send email to when finished (comma separated list)
-emailRecipients=halfdanr@ibv.uio.no
+emailRecipients=halfdanr@ibv.uio.no,alexajo@uio.no
 ##Read parForShell.sh use data form Aves readme file
 ##How to read par file: 
 ##http://stackoverflow.com/questions/17530141/how-to-include-a-file-containing-variables-in-a-shell-script
@@ -21,7 +21,7 @@ emailRecipients=halfdanr@ibv.uio.no
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
 ######################Go to Norstore and create directory for delivery##########################
 ##########################################SSH Norstore##########################################
-ssh halfdanr@login.norstore.uio.no <<HERE
+ssh login.norstore.uio.no <<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/
 mkdir Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 HERE
@@ -59,14 +59,14 @@ echo "Creating the tarball"
    ##This should be a temporary solution (until it is possible to copy file s with parallel rsync script)
    rm -rf ./$extSampleName
    ##Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-   rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using script for parallell rsync instead: Only takes content of a directory as input
 	echo "Copying tar file"
 	export PATH=$PATH:/usit/abel/u1/olews/work/parsyncfp
 	##Using a script for parallel copying provided by Ole Widar Saastad from USIT
-	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using par
-	#parsyncfp -NP=24 $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#parsyncfp -NP=24 $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 else
    echo "The user do not want raw data"
    echo "Creating the tarball"
@@ -74,18 +74,18 @@ else
    ##Remove folder so that it does not get copied along with tar ball. This should be a temporary solution (until it is possible to copy file s with parallel rsync script)
    rm -rf ./$extSampleName
    ##Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-   rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using script for parallell rsync instead: Only takes content of a directory as input
 	echo "Copying tar file"
-	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#/work/projects/nscdata/shellScripts/rsync_parallel.sh --parallel=8  -av ./ login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 	##Using par
-	#parsyncfp -NP=24 $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+	#parsyncfp -NP=24 $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 fi
 
 #find -L ./$extSampleName -iname "*.metadata.xml" -o -name "*.subreads.fastq" -o -name "*.bax.h5" | tar -h -czvf $extSampleName.tgz -T -
 
 ##Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-#rsync -av $extSampleName.tgz halfdanr@login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+#rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 ##Record time at end
 end=$(date +%s)
 ##Calculate runtime
@@ -93,13 +93,13 @@ runtime=$(python -c "print(${end} - ${start})")
 ##Send email
 ##########################################Go to cod node to send email##########################
 ##########################################SSH Cod node##########################################
-ssh halfdanr@cod3.uio.no <<HERE
+ssh cod3.uio.no <<HERE
 #cat > email.txt << EOF1
 #Subject:$extSampleName has been copied to Norstore
 
 #$extSampleName has been copied to Norstore. Runtime was $runtime.
 #EOF1
-#sendmail halfdanr@ibv.uio.no < email.txt
+#sendmail halfdanr@ibv.uio.no,alexajo@uio.no < email.txt
 echo "sending email to $emailAdressOfScriptRunner using variable"
 echo "$extSampleName has been copied to Norstore. Runtime was $runtime" | mail -s "$extSampleName has been copied to Norstore" $emailRecipients
 HERE
