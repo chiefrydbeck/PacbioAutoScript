@@ -36,10 +36,8 @@ echo "</Limit>" >> .htaccess
 #Change the file rights so that the file(s) can be downloaded
 chmod -R 755 *
 #Add the password to the password database file using the command below
-htpasswd -b /norstore_osl/home/timothyh/.htpasswd ${refLastNameCust_lower}-${sampleType}
+htpasswd -b /norstore_osl/home/timothyh/.htpasswd ${refLastNameCust_lower}-${sampleType} "${pw}"
 ##how do I enter the passord automatically??This seem sto work
-${pw}
-${pw}
 HERE
 ####################################################################################
 ##############################Formulate an email
