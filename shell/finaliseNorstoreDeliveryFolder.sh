@@ -5,7 +5,7 @@
 . $1/parForShell.sh
 #Make variable string content lower case
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
-emailRecipients=halfdanr@ibv.uio.no,alexajo@uio.no
+emailRecipients=${USER}@uio.no
 #Create password for delivery folder
 pw=$(tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1)
 #write pwd
