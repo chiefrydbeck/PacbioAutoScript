@@ -11,6 +11,7 @@ start=$(date +%s.%N)
 #testOrFullScale=yes
 ##Send email to when finished (comma separated list)
 emailRecipients=${USER}@uio.no
+emailSender=${USER}@uio.no
 ##Read parForShell.sh use data form Aves readme file
 ##How to read par file: 
 ##http://stackoverflow.com/questions/17530141/how-to-include-a-file-containing-variables-in-a-shell-script
@@ -93,16 +94,17 @@ runtime=$(python -c "print(${end} - ${start})")
 ##Send email
 ##########################################Go to cod node to send email##########################
 ##########################################SSH Cod node##########################################
-ssh halfdanr@cod5.hpc.uio.no <<HERE
+#ssh halfdanr@cod5.hpc.uio.no <<HERE
 #cat > email.txt << EOF1
 #Subject:$extSampleName has been copied to Norstore
 
 #$extSampleName has been copied to Norstore. Runtime was $runtime.
 #EOF1
-sendmail ${USER}@uio.no
-echo "sending email to ${emailRecipients} using variable"
-echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mail -s "${extSampleName} has been copied to Norstore" ${emailRecipients}
-HERE
+#sendmail ${USER}@uio.no
+#echo "sending email to ${emailRecipients} using variable"
+#echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mail -s "${extSampleName} has been copied to Norstore" ${emailRecipients}
+#HERE
+echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mailx -s "${extSampleName} has been copied to Norstore" -r ${emailSender} ${emailRecipients}
 ##########################################logout cod node##########################################
 
 
