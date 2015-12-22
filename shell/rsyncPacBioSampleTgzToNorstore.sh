@@ -93,11 +93,7 @@ runtime=$(python -c "print(${end} - ${start})")
 ##Send email
 ##########################################Go to cod node to send email##########################
 ##########################################SSH Cod node##########################################
-<<<<<<< HEAD
-ssh cod3.uio.no <<HERE
-=======
 ssh halfdanr@cod5.hpc.uio.no <<HERE
->>>>>>> 7c617049b60b32f3b794ff566e25486e4653fd66
 #cat > email.txt << EOF1
 #Subject:$extSampleName has been copied to Norstore
 
