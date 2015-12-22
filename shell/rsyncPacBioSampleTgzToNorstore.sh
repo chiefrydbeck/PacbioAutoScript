@@ -122,8 +122,10 @@ runtime_h=$(displaytime runtime)
 #echo "sending email to ${emailRecipients} using variable"
 #echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mail -s "${extSampleName} has been copied to Norstore" ${emailRecipients}
 #HERE
-echo "${extSampleName} has been copied to Norstore at /projects/NS9012K/www/hts-nonsecure.uio.no/Project_${refLastNameCust}_${sampleType}_${(date +%Y-%m-%d)}. Runtime was ${runtime_h} or ${runtime} measured as seconds only" | mailx -s "${extSampleName} has been copied to Norstore" -r ${emailSender} ${emailRecipients}
+echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime_h} or ${runtime} measured as seconds only" | mailx -s "${extSampleName} has been copied to Norstore" -r ${emailSender} ${emailRecipients}
 ##########################################logout cod node##########################################
+##this one did not work
+#at /projects/NS9012K/www/hts-nonsecure.uio.no/Project_${refLastNameCust}_${sampleType}_${(date +%Y-%m-%d)}
 
 
 
