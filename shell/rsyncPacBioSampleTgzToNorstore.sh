@@ -6,7 +6,9 @@
 #
 ##########################################Working at Abel######################################
 ##Record time at start
-start=$(date +%s.%N)
+## %S =    second (00..60)
+## %N =    nanoseconds (000000000..999999999)
+start=$(date +%s)
 ##Can optionally run a fast test of the script using small files. Not in use yet
 #testOrFullScale=yes
 ##Send email to when finished (comma separated list)
