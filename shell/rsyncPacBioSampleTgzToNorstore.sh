@@ -23,7 +23,7 @@ refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:
 ##########################################SSH Norstore##########################################
 ssh login.norstore.uio.no <<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/
-mkdir Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+mkdir -p Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 HERE
 ##########################################logout Norstore########################################
 ##At Abel
