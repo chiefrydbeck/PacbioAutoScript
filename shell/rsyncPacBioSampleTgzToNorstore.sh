@@ -91,6 +91,22 @@ fi
 end=$(date +%s)
 ##Calculate runtime
 runtime=$(python -c "print(${end} - ${start})")
+
+function displaytime {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%d days ' $D
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+  printf '%d seconds\n' $S
+}
+
+runtime_h=$(displaytime runtime)
+
 ##Send email
 ##########################################Go to cod node to send email##########################
 ##########################################SSH Cod node##########################################
@@ -104,7 +120,7 @@ runtime=$(python -c "print(${end} - ${start})")
 #echo "sending email to ${emailRecipients} using variable"
 #echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mail -s "${extSampleName} has been copied to Norstore" ${emailRecipients}
 #HERE
-echo "${extSampleName} has been copied to Norstore. Runtime was ${runtime}" | mailx -s "${extSampleName} has been copied to Norstore" -r ${emailSender} ${emailRecipients}
+echo "${extSampleName} has been copied to Norstore at /projects/NS9012K/www/hts-nonsecure.uio.no/Project_${refLastNameCust}_$sampleType_${(date +%Y-%m-%d)}. Runtime was ${runtime_h} or ${runtime} measured as seconds only" | mailx -s "${extSampleName} has been copied to Norstore" -r ${emailSender} ${emailRecipients}
 ##########################################logout cod node##########################################
 
 
