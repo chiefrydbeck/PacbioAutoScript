@@ -22,11 +22,14 @@ emailSender=${USER}@uio.no
 . $1/parForShell.sh
 ##Make variable string content lower case
 refLastNameCust_lower=$( echo "$refLastNameCust" | tr -s  '[:upper:]'  '[:lower:]' )
+##Define project folder name
+projectFolderName=Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
 ######################Go to Norstore and create directory for delivery##########################
 ##########################################SSH Norstore##########################################
 ssh login.norstore.uio.no <<HERE
 cd /projects/NS9012K/www/hts-nonsecure.uio.no/
-mkdir -p Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+echo mkdir -p "${projectFolderName}"
+mkdir -p "${projectFolderName}"
 HERE
 ##########################################logout Norstore########################################
 ##At Abel
@@ -61,8 +64,12 @@ echo "Creating the tarball"
    ##Remove folder so that it does not get copied along with tar ball. 
    ##This should be a temporary solution (until it is possible to copy file s with parallel rsync script)
    rm -rf ./$extSampleName
+   ##make md5sum file
+   md5sum $extSampleName.tgz  > $extSampleName.tgz.md5
    ##Copy tarball to Norstore; test.txt should be replaced by $extSampleName.tgz
-   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)
+   rsync -av $extSampleName.tgz login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/$projectFolderName
+   ##Copy md5sum
+   rsync -av $extSampleName.tgz.md5 login.norstore.uio.no:/projects/NS9012K/www/hts-nonsecure.uio.no/Project\_$refLastNameCust\_$sampleType\_$(date +%Y-%m-%d)/md5sums.txt	
 	##Using script for parallell rsync instead: Only takes content of a directory as input
 	echo "Copying tar file"
 	export PATH=$PATH:/usit/abel/u1/olews/work/parsyncfp
